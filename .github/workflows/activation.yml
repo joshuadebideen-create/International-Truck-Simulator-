@@ -3,6 +3,9 @@ name: Generate Unity Activation File
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   activation:
@@ -17,3 +20,4 @@ jobs:
         with:
           name: Unity-Activation-File
           path: ./*.alf
+
