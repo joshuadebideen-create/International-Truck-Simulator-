@@ -6,16 +6,16 @@ on:
 
 jobs:
   activation:
-    name: Request activation file
     runs-on: ubuntu-latest
     steps:
-      - name: Generate Unity activation file
+      - name: Generate activation file
         id: activation
         uses: game-ci/unity-request-activation-file@v2
+
       - name: Upload activation file
         uses: actions/upload-artifact@v4
         with:
           name: Unity-Activation-File
           path: ${{ steps.activation.outputs.filePath }}
           if-no-files-found: error
-          retention-days: 7
+
