@@ -8,6 +8,8 @@ public class TruckController : MonoBehaviour
     [SerializeField] private WheelCollider[] driveWheels;
     [SerializeField] private WheelCollider[] steeringWheels;
     [SerializeField] private WheelCollider[] brakeWheels;
+    [Header("Truck Configuration")]
+    [SerializeField] private TruckDefinition truckDefinition;
 
     [Header("Driving Settings")]
     [Min(0f)]
@@ -34,8 +36,18 @@ public class TruckController : MonoBehaviour
     public float SpeedKmh { get; private set; }
 
     private void Awake()
+{
+    truckBody = GetComponent<Rigidbody>();
+
+    if (truckDefinition != null)
     {
-        truckBody = GetComponent<Rigidbody>();
+        truckBody.mass = truckDefinition.vehicleMassKg;
+        maxMotorTorque = truckDefinition.torqueNm;
+        maxSteeringAngle = truckDefinition.maximumSpeedKmh > 0f
+            ? maxSteeringAngle
+            : maxSteeringAngle;
+    }
+}
     }
 
     public void SetControls(
