@@ -82,13 +82,38 @@ public class TruckController : MonoBehaviour
         steeringInput = 0f;
     }
 
-    private void FixedUpdate()
-    {
-        SpeedKmh = truckBody.linearVelocity.magnitude * 3.6f;
+    
+private void FixedUpdate()
+{
+    Vector3 velocity = truckBody.linearVelocity;
 
-        ApplyMotorTorque();
-        ApplyBrakes();
-        ApplySteering();
+    float maxSpeedKmh = truckDefinition != null
+        ? truckDefinition.maximumSpeedKmh
+        : 0f;
+
+    Vector3 horizontalVelocity =
+        new Vector3(velocity.x, 0f, velocity.z);
+
+    if (maxSpeedKmh > 0f &&
+        horizontalVelocity.magnitude > maxSpeedKmh / 3.6f)
+    {
+        horizontalVelocity =
+            horizontalVelocity.normalized * (maxSpeedKmh / 3.6f);
+
+        truckBody.linearVelocity = new Vector3(
+            horizontalVelocity.x,
+            velocity.y,
+            horizontalVelocity.z
+        );
+    }
+
+    SpeedKmh = truckBody.linearVelocity.magnitude * 3.6f;
+
+    ApplyMotorTorque();
+    ApplyBrakes();
+    ApplySteering();
+}
+
     }
 
     private void ApplyMotorTorque()
