@@ -69,11 +69,7 @@ public class TruckMobileUIBuilder : MonoBehaviour
         TruckTouchButton touch =
             buttonObject.AddComponent<TruckTouchButton>();
 
-        var serializedTouch = new SerializedObject(touch);
-        serializedTouch.FindProperty("truck").objectReferenceValue = truck;
-        serializedTouch.FindProperty("controlType").enumValueIndex =
-            (int)controlType;
-        serializedTouch.ApplyModifiedProperties();
+        touch.Configure(truck, controlType);
 
         GameObject textObject = new GameObject("Label");
         textObject.transform.SetParent(buttonObject.transform, false);
