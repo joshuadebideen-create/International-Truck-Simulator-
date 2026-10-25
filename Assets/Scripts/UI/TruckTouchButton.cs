@@ -13,7 +13,11 @@ public class TruckTouchButton : MonoBehaviour,
         SteerLeft,
         SteerRight
     }
-
+    public void Configure(TruckController truckController, ControlType type)
+    {
+        truck = truckController;
+        controlType = type;
+    }
     [Header("Control Setup")]
     [SerializeField] private TruckController truck;
     [SerializeField] private ControlType controlType;
