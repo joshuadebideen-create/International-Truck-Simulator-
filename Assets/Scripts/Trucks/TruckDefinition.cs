@@ -9,12 +9,16 @@ public class TruckDefinition : ScriptableObject
 {
     [Header("Truck Identity")]
     public string truckName = "International Truck";
+    public string displayName = "International Truck";
     public string manufacturer = "International";
     public string modelYear = "2026";
 
     [Header("Engine")]
     [Min(1)]
     public int horsepower = 500;
+
+    [Min(1)]
+    public int engineHorsepower = 500;
 
     [Min(0)]
     public float torqueNm = 2500f;
@@ -32,4 +36,8 @@ public class TruckDefinition : ScriptableObject
 
     [Min(0.1f)]
     public float finalDriveRatio = 3.55f;
+
+    [Header("Fuel")]
+    [Min(0f)]
+    public float fuelCapacityLitres = 600f;
 }
