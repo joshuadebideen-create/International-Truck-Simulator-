@@ -28,11 +28,19 @@ namespace InternationalTruckSimulator.Editor
 
             // Keep existing enabled build scenes.
             var scenes = EditorBuildSettings.scenes
+              const string starterScenePath =
+    "Assets/Scenes/StarterHighway.unity";
+
+if (!File.Exists(starterScenePath))
+{
+    CreateHighwayScene.Create();
+    AssetDatabase.Refresh();
+}  
                 .Where(scene => scene.enabled &&
                                 !string.IsNullOrEmpty(scene.path) &&
                                 File.Exists(scene.path))
                 .Select(scene => scene.path)
-                .ToList();
+                .ToList();scenes.Insert(0, starterScenePath);
 
             // If Build Settings has no scenes, find an existing scene.
             if (scenes.Count == 0)
