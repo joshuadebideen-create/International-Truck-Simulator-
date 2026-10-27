@@ -95,10 +95,7 @@ jobs:
           if-no-files-found: error
           name: ${{ github.run_number }}.${{ github.run_attempt }}-${{ matrix.os }}-${{ matrix.build-target }}-Build
           path: |
-            ${{ env.UNITY_PROJECT_PATH }}/Builds/${{ matrix.build-target }}/**/*
-            !${{ env.UNITY_PROJECT_PATH }}/Library/**/*
-            !/**/*_BackUpThisFolder_ButDontShipItWithYourGame/**
-            !/**/*_BurstDebugInformation_DoNotShip/**
+            ${{ env.UNITY_PROJECT_PATH }}/Build/InternationalTruckSimulator.apk
       - uses: actions/upload-artifact@v7
         id: upload-logs
         name: Upload ${{ matrix.build-target }} Logs
