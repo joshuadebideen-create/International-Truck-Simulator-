@@ -58,21 +58,18 @@ namespace InternationalTruckSimulator.Editor
                     chosenScene = existingScenes.FirstOrDefault();
                 }
 
-                // Create a basic scene only if none exists.
-                if (string.IsNullOrEmpty(chosenScene))
-                {
-                    Scene newScene = EditorSceneManager.NewScene(
-                        NewSceneSetup.DefaultGameObjects,
-                        NewSceneMode.Single);
+                // Generate the highway scene if no scene exists.
+if (string.IsNullOrEmpty(chosenScene))
+{
+    CreateHighwayScene.Create();
 
-                    EditorSceneManager.SaveScene(newScene, scenePath);
-                    AssetDatabase.Refresh();
+    chosenScene = "Assets/Scenes/StarterHighway.unity";
 
-                    chosenScene = scenePath;
+    AssetDatabase.Refresh();
 
-                    Debug.Log(
-                        "Created a starter scene at " + scenePath);
-                }
+    Debug.Log(
+        "Created starter highway scene at " + chosenScene);
+}
 
                 scenes.Add(chosenScene);
             }
